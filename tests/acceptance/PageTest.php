@@ -1,0 +1,48 @@
+<?php
+
+use Codeception\Example;
+use Yandex\Allure\Adapter\Annotation\AllureId;
+use Yandex\Allure\Adapter\Annotation\Title;
+use Yandex\Allure\Adapter\Annotation\Description;
+use Yandex\Allure\Adapter\Annotation\TestCaseId;
+use Yandex\Allure\Adapter\Annotation\Issues;
+use Yandex\Allure\Adapter\Annotation\Features;
+use Yandex\Allure\Adapter\Annotation\Stories;
+
+/**
+ * Class FirstCest
+ * Tests links
+ */
+class PageTest
+{
+    /**
+     * @AllureId("123")
+     * @Title("Test link title")
+     * @Issues("SSS-1111")
+     * @TestCaseId("23")
+     * @Description("Test link test desc")
+     * @Features({"First Feature"})
+     * @Stories({"First Story"})
+     * @dataProvider pageProvider
+     * @param AcceptanceTester $I
+     * @param Example $example
+     */
+    public function testPageTitle(AcceptanceTester $I, Example $example)
+    {
+        $I->amOnPage($example['url']);
+        $I->see($example['title']);
+    }
+
+    /**
+     * @return array
+     */
+    protected function pageProvider()
+    {
+        return [
+            ['url' => "/", 'title' => "Website"],
+            ['url' => "/info", 'title' => "Info"],
+            ['url' => "/about-us", 'title' => "About Us"],
+            ['url' => "/contact-us", 'title' => "Contact Us"]
+        ];
+    }
+}

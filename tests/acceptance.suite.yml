@@ -1,0 +1,23 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: AcceptanceTester
+modules:
+  enabled:
+    - PhpBrowser:
+        url: https://www.website.com/
+    - \Helper\Acceptance
+  step_decorators: ~
+extensions:
+  enabled:
+    - Yandex\Allure\Codeception\AllureCodeception
+  config:
+    Yandex\Allure\Codeception\AllureCodeception:
+      deletePreviousResults: true
+      outputDirectory: allure-results
+      ignoredAnnotations:
+        - env
+        - dataprovider
